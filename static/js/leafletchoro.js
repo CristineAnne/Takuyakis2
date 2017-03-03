@@ -35,8 +35,6 @@ var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return cro
 			
 		var ChoroplethChart = dc.leafletChoroplethChart("#Choropleth-Chart");
 
-		var data = crossfilter(csv);
-
                 var weekday = data.dimension(function (d) {
                     return d["weekday"];
                 });
