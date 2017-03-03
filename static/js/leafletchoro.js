@@ -1,5 +1,5 @@
-var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return crossfilter(csv)});
-
+function load(firstload){
+d3.csv("data/leafletChoroplethChart.csv", function (csv) {
      function reduceAdd(state, attr) {
             return function(p,v) {
                     ++p.count
@@ -34,6 +34,8 @@ var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return cro
 			numberFormat2 = d3.format(",");
 			
 		var ChoroplethChart = dc.leafletChoroplethChart("#Choropleth-Chart");
+
+		var data = crossfilter(csv);
 
                 var weekday = data.dimension(function (d) {
                     return d["weekday"];
@@ -87,16 +89,15 @@ var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return cro
 			.calculateColorDomain([0,150000])
             .geojson(MMMuniCities.features)
             .featureKeyAccessor(function(feature) {
-				return feature.properties.NAME_2;
-                        })
-                        .title(function (d) {
-							unmet = d.value.count-d.value.count3
-							average = d.value.sums/d.value.count2
-							total_lost = unmet*average
-                            return "Location: " + d.key + "\n\n Total Unmet Demand: " + numberFormat2(unmet ? unmet : 0) + 
-							"\n\n Average Fare: " + numberFormat(average ? average : 0) + "\n Total Lost Opportunity: " + numberFormat(total_lost ? total_lost : 0);
-                        })
-                        .legend(dc.leafletLegend().position('bottomright'));
+				return feature.properties.NAME_2;})
+            .title(function (d) {
+				unmet = d.value.count-d.value.count3
+				average = d.value.sums/d.value.count2
+				total_lost = unmet*average
+                return "Location: " + d.key + "\n\n Total Unmet Demand: " + numberFormat2(unmet ? unmet : 0) + 
+				"\n\n Average Fare: " + numberFormat(average ? average : 0) + "\n Total Lost Opportunity: " + numberFormat(total_lost ? total_lost : 0);
+                })
+            .legend(dc.leafletLegend().position('bottomright'));
 			
 	
 		function insights() {
@@ -124,18 +125,18 @@ var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return cro
 		}
 		
 		insights()
-        dc.renderAll();
- //               });
-//            });
+		if (firstload == 0) 
+			dc.renderAll();
+		else {
+		ChoroplethChart
+			.calculateColorDomain([0,150000])
+			.redraw();
+		};
 
-function viz() {
-	var weekday = document.getElementById("weekday").value
-	var hour = document.getElementById("hour").value
-	alldim.filter(function(d){return d.weekday == weekday & d.timeframe == hour}); 
-			
-	insights();
-			
-	ChoroplethChart
-		.calculateColorDomain([0,150000])
-		.redraw()
+ //               });
+			});
+}
+load(0)
+function viz() {			
+	load(1)
 };
