@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+        <title>leaflet choropleth</title>
+
+        <link rel="stylesheet" href="./static/lib/css/dc.css">
+        <link rel="stylesheet" href="./static/lib/css/leaflet.css">
+        <link rel="stylesheet" href="./static/lib/css/dc-leaflet-legend.css">
+        <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+
+        <script src="./static/lib/js/d3.min.js"></script>
+        <script src="./static/lib/js/crossfilter.js"></script>
+        <script src="./static/lib/js/crossfilter.min.js"></script>
+        <script src="./static/lib/js/dc.js"></script>
+        <script src="./static/lib/js/leaflet.js"></script>
+
+        <script src="./static/lib/js/dc-leaflet.js"></script>
+
+    </head>
+    <body>
+    <div class = "container-fluid cont-1">
+        <div class = "row">
+            <div class = "col-lg-12">
+                
+                <div class = "col-lg-2">
+			</br>
+			</br>
+			</br>
+				
+			Choose Day:
+			</br>
+				<select id ="weekday"> 
+					<option value ="Sun" selected>Sunday</option>
+					<option value ="Mon">Monday</option>
+					<option value ="Tues">Tuesday</option>
+					<option value ="Wed">Wednesday</option>
+					<option value ="Thurs">Thursday</option>
+					<option value ="Fri">Friday</option>
+					<option value ="Sat">Saturday</option>
+				</select>
+			</br>
+			</br>
+			</br>Choose Time Frame:
+			</br>
+				<select id ="hour"> 
+					<option value ="00:00 to 03:00 am" selected>00:00 to 03:00 am</option>
+					<option value ="03:01 to 06:00 am">03:01 to 06:00 am</option>
+					<option value ="06:01 to 09:00 am">06:01 to 09:00 am</option>
+					<option value ="09:01 to 12:00 nn">09:01 to 12:00 nn</option>
+					<option value ="12:01 to 03:00 pm">12:01 to 03:00 pm</option>
+					<option value ="03:01 to 06:00 pm">03:01 to 06:00 pm</option>
+					<option value ="06:01 to 09:00 pm">06:01 to 09:00 pm</option>
+					<option value ="09:01 to 00:00 pm">09:01 to 00:00 pm</option>
+				</select>
+			</br>
+			</br>			
+			</br>
+			</br>
+			<button type="button" onclick=viz() style = "{align-items: center;}">Visualize!</button>
+			</br>
+			</br>
+			</br>
+            <p style= "{text-align: center}">Prioritize deployment of additional <strong><span id ="numCars"></span></strong> cars in <strong><span id ="toplocation"></span> </strong>to earn additional <strong>Php <span id ="totallost"></span></strong>
+			</p>
+			</div>
+			</br>
+			</br>
+                
+                <div class = "col-lg-10">
+				<div id="Choropleth-Chart" style="width:55%; height:550px;">
+					<a class="reset" href="javascript:ChoroplethChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+					<span class="reset" style="display: none;"> | Current filter: <span class="filter"></span></span>
+				</div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    </body>
+		<!--script> </script-->
+        <script src="./static/js/leafletchoro.js"></script>
+</html>
