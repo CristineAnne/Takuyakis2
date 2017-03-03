@@ -1,4 +1,4 @@
-var csv = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return csv});
+var data = d3.csv("data/leafletChoroplethChart.csv", function (csv) { return crossfilter(csv)});
 
      function reduceAdd(state, attr) {
             return function(p,v) {
