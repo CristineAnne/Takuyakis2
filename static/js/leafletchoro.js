@@ -109,9 +109,8 @@ d3.csv("data/leafletChoroplethChart.csv", function (csv) {
 					unmet = d.value.count-d.value.count3
 					average = d.value.sums/d.value.count2
 					total_lost = unmet*average
-					return "Location: " + d.key + <br> + "Total Unmet Demand: " + numberFormat2(unmet ? unmet : 0) + 
-					+ <br> + "Average Fare: " + numberFormat(average ? average : 0) +  <br> + "Total Lost Opportunity: " + <br> + numberFormat(total_lost ? total_lost : 0);
-					})
+					return "Location: " + d.key + "\n\n Total Unmet Demand: " + numberFormat2(unmet ? unmet : 0) + 
+						"\n\n Average Fare: " + numberFormat(average ? average : 0) + "\n Total Lost Opportunity: " + numberFormat(total_lost ? total_lost : 0);					})
 				.legend(dc.leafletLegend().position('bottomright'));
 
 			dc.renderAll();
